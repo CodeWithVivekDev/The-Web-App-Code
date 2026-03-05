@@ -5,122 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Story to Video Converter</title>
     <style>
-        :root {
-            --primary: #6366f1;
-            --bg-dark: #0f172a;
-            --text-light: #f8fafc;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            display: flex;
-            gap: 40px;
-            max-width: 1000px;
-            width: 100%;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .input-section {
-            flex: 1;
-            min-width: 300px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        textarea {
-            width: 100%;
-            height: 200px;
-            background: #1e293b;
-            color: white;
-            border: 2px solid #334155;
-            border-radius: 10px;
-            padding: 15px;
-            font-size: 16px;
-            resize: none;
-            box-sizing: border-box;
-        }
-        button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #4f46e5;
-            transform: translateY(-2px);
-        }
-        /* 9:16 Aspect Ratio Screen for Shorts */
-        .video-screen {
-            width: 315px;
-            height: 560px;
-            background: linear-gradient(135deg, #1e1b4b, #312e81);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border: 4px solid #334155;
-            box-sizing: border-box;
-        }
-        .dynamic-text {
-            font-size: 32px;
-            font-weight: 800;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-            margin-bottom: 20px;
-            animation: popIn 0.3s ease-out;
-        }
-        .dynamic-emoji {
-            font-size: 60px;
-            animation: floatUp 0.5s ease-out;
-        }
-        @keyframes popIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        @keyframes floatUp {
-            0% { transform: translateY(20px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
+        /* [Previous CSS remains exactly the same] */
+        :root { --primary: #6366f1; --bg-dark: #0f172a; --text-light: #f8fafc; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-dark); color: var(--text-light); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .container { display: flex; gap: 40px; max-width: 1000px; width: 100%; flex-wrap: wrap; justify-content: center; }
+        .input-section { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 15px; }
+        textarea { width: 100%; height: 200px; background: #1e293b; color: white; border: 2px solid #334155; border-radius: 10px; padding: 15px; font-size: 16px; resize: none; box-sizing: border-box; }
+        .btn-group { display: flex; gap: 10px; }
+        button { flex: 1; background: var(--primary); color: white; border: none; padding: 15px; font-size: 16px; font-weight: bold; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #4f46e5; transform: translateY(-2px); }
+        .record-btn { background: #e11d48; }
+        .record-btn:hover { background: #be123c; }
+        .video-screen { width: 315px; height: 560px; background: linear-gradient(135deg, #1e1b4b, #312e81); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; position: relative; overflow: hidden; border: 4px solid #334155; box-sizing: border-box; }
+        .dynamic-text { font-size: 32px; font-weight: 800; color: #fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); margin-bottom: 20px; animation: popIn 0.3s ease-out; }
+        .dynamic-emoji { font-size: 60px; animation: floatUp 0.5s ease-out; }
+        @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes floatUp { 0% { transform: translateY(20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
 <body>
 
     <div class="container">
         <div class="input-section">
-            <h2>🚀 Story to Shorts</h2>
-            <p>Paste your script below. The system will auto-detect keywords to add emojis and read it out loud.</p>
+            <h2>🚀 Story to Shorts Generator</h2>
+            <p>Paste your script below. Click Record, select this browser tab (make sure to share audio), and watch the magic happen.</p>
             <textarea id="storyText">The CEO arrived in Seoul. It was raining heavily. He suddenly saw her across the street. His heart stopped. The ultimate drama begins now!</textarea>
-            <button onclick="startVideo()">▶️ Generate & Play Video</button>
+            
+            <div class="btn-group">
+                <button onclick="startVideo()">▶️ Preview Only</button>
+                <button class="record-btn" onclick="startRecording()">🔴 Record & Download</button>
+            </div>
         </div>
 
         <div class="video-screen" id="videoScreen">
             <div class="dynamic-emoji" id="emojiDisplay">🎬</div>
-            <div class="dynamic-text" id="textDisplay">Ready to play...</div>
+            <div class="dynamic-text" id="textDisplay">Ready...</div>
         </div>
     </div>
 
     <script>
-        // Simple dictionary to map words to emojis/images
         const emojiMap = {
             "ceo": "👔", "seoul": "🏙️", "raining": "🌧️", "heavily": "⛈️", 
             "saw": "👀", "her": "👩🏻", "street": "🚦", "heart": "💔", 
@@ -130,51 +53,88 @@
 
         let synthesis = window.speechSynthesis;
         let isPlaying = false;
+        let mediaRecorder;
+        let recordedChunks = [];
 
-        function startVideo() {
-            if (isPlaying) {
-                synthesis.cancel(); // Stop if already playing
+        // Function 1: Start Screen Recording
+        async function startRecording() {
+            try {
+                // Prompt user to select the tab to record
+                const stream = await navigator.mediaDevices.getDisplayMedia({
+                    video: { displaySurface: "browser" },
+                    audio: true // Crucial to capture the Text-to-Speech voice!
+                });
+
+                mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+
+                mediaRecorder.ondataavailable = function(event) {
+                    if (event.data.size > 0) recordedChunks.push(event.data);
+                };
+
+                mediaRecorder.onstop = function() {
+                    // Create the video file and trigger download
+                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = 'AI_Short_Video.webm';
+                    document.body.appendChild(a);
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    recordedChunks = []; // Reset for next recording
+                    
+                    // Stop all screen sharing tracks
+                    stream.getTracks().forEach(track => track.stop());
+                };
+
+                // Start recording and immediately start the video playback
+                mediaRecorder.start();
+                startVideo(true); 
+
+            } catch (err) {
+                console.error("Error starting recording:", err);
+                alert("Recording cancelled or permissions denied.");
             }
+        }
+
+        // Function 2: Play the Video (Text + Voice + Emojis)
+        function startVideo(isRecording = false) {
+            if (isPlaying) synthesis.cancel();
 
             const rawText = document.getElementById('storyText').value;
             if (!rawText.trim()) return alert("Please enter a story!");
 
-            // Split text into words for the visual display
             const words = rawText.split(/\s+/);
             const textDisplay = document.getElementById('textDisplay');
             const emojiDisplay = document.getElementById('emojiDisplay');
             
-            // Setup Text-to-Speech
             const utterance = new SpeechSynthesisUtterance(rawText);
-            utterance.rate = 1.0; // Speed of voice
-            utterance.pitch = 1.0;
+            utterance.rate = 1.0; 
             
             let wordIndex = 0;
 
-            // This event fires as the voice reads each word
             utterance.onboundary = (event) => {
                 if (event.name === 'word' && wordIndex < words.length) {
                     let currentWord = words[wordIndex];
-                    let cleanWord = currentWord.toLowerCase().replace(/[^a-z]/g, ""); // Remove punctuation for matching
+                    let cleanWord = currentWord.toLowerCase().replace(/[^a-z]/g, ""); 
                     
-                    // Update Text
                     textDisplay.textContent = currentWord;
                     
-                    // Update Emoji if a match is found
                     if (emojiMap[cleanWord]) {
                         emojiDisplay.textContent = emojiMap[cleanWord];
-                        // Trigger animation reset
-                        emojiDisplay.style.animation = 'none';
-                        emojiDisplay.offsetHeight; /* trigger reflow */
-                        emojiDisplay.style.animation = null; 
                     } else {
-                        emojiDisplay.textContent = "✨"; // Default fallback
+                        emojiDisplay.textContent = "✨";
                     }
                     
-                    // Trigger text animation reset
+                    // Reset animations
+                    emojiDisplay.style.animation = 'none';
+                    emojiDisplay.offsetHeight; 
+                    emojiDisplay.style.animation = 'floatUp 0.5s ease-out'; 
+                    
                     textDisplay.style.animation = 'none';
                     textDisplay.offsetHeight; 
-                    textDisplay.style.animation = null;
+                    textDisplay.style.animation = 'popIn 0.3s ease-out';
 
                     wordIndex++;
                 }
@@ -182,8 +142,13 @@
 
             utterance.onend = () => {
                 isPlaying = false;
-                textDisplay.textContent = "Video Finished!";
+                textDisplay.textContent = "Done!";
                 emojiDisplay.textContent = "✅";
+                
+                // If we are recording, stop the recorder when the voice finishes
+                if (isRecording && mediaRecorder && mediaRecorder.state !== "inactive") {
+                    setTimeout(() => mediaRecorder.stop(), 1000); // 1-second buffer at the end
+                }
             };
 
             isPlaying = true;
